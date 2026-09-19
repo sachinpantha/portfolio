@@ -1,6 +1,12 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "Sachin Pantha — Portfolio",
+  "short_name": "Sachin Pantha",
+  "description": "Web Developer, Blockchain Engineer, UI/UX Designer, AI Researcher & Mathematics Educator from Nepal.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#d4891e",
+  "background_color": "#fafaf8",
+  "lang": "en",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +16,14 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  ]
 }

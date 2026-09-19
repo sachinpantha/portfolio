@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ThemeProvider } from "./context/ThemeContext";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Expertise from "./components/Expertise";
+import Skills from "./components/Skills";
+import Research from "./components/Research";
+import Teaching from "./components/Teaching";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import Loader from "./components/Loader";
+import Cursor from "./components/Cursor";
+import "./index.css";
 
 function App() {
+  const [loaded, setLoaded] = useState(false);
+  const handleDone = useCallback(() => setLoaded(true), []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <Cursor />
+      <AnimatePresence>
+        {!loaded && <Loader key="loader" onDone={handleDone} />}
+      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaded ? 1 : 0 }}
+        transition={{ duration: 0.6 }}
+        style={{ background: "var(--bg)", minHeight: "100vh" }}
+      >
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Expertise />
+          <Skills />
+          <Research />
+          <Teaching />
+          <Contact />
+        </main>
+        <Footer />
+      </motion.div>
+    </ThemeProvider>
   );
 }
 

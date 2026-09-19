@@ -1,0 +1,22 @@
+/* TEAM */
+Name: Sachin Pantha
+Role: Web Developer, Blockchain Engineer, UI/UX Designer, AI Researcher, Mathematics Educator
+Location: Nepal
+GitHub: https://github.com/sachinpantha
+Facebook: https://www.facebook.com/sachin.nihc
+Instagram: https://www.instagram.com/whoisssachinn
+
+/* ABOUT */
+Sachin Pantha is an IT graduate from Nepal with 5+ years of experience across
+web development, blockchain engineering, UI/UX design, AI research, and
+mathematics education. He has taught over 1000 students across Nepal in
+engineering entrance preparation. He is rooted in Dharma and guided by purpose.
+
+Skills: React, JavaScript, TypeScript, Node.js, Tailwind CSS, Web3, Solidity,
+        Figma, Python, Machine Learning, Calculus, Linear Algebra
+
+/* SITE */
+Last update: 2025
+Language: English
+Doctype: HTML5
+IDE: VS Code
