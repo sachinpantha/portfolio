@@ -1,6 +1,6 @@
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { ArrowRight, MapPin, Flame } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, MapPin, Flame, ChevronDown } from "lucide-react";
 import { FaFacebook, FaInstagram, FaGithub, FaCode, FaBrain, FaBook, FaPenNib } from "react-icons/fa";
 import profileImg from "../assets/image.jpg";
 
@@ -9,6 +9,8 @@ const fadeUp = (delay = 0) => ({
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] },
 });
+
+const roles = ["Web Developer", "AI Researcher", "Math Educator", "UI/UX Designer", "Blockchain Builder"];
 
 const floatingCards = [
   { Icon: FaCode, label: "Web Dev", color: "#3b82f6", pos: { top: "-20px", right: "-72px" } },
@@ -46,17 +48,57 @@ function Counter({ to }) {
   return <motion.span ref={ref}>{rounded}</motion.span>;
 }
 
+function Typewriter() {
+  const [index, setIndex] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = roles[index];
+    let timeout;
+    if (!deleting && displayed.length < current.length) {
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), 60);
+    } else if (!deleting && displayed.length === current.length) {
+      timeout = setTimeout(() => setDeleting(true), 1800);
+    } else if (deleting && displayed.length > 0) {
+      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), 35);
+    } else if (deleting && displayed.length === 0) {
+      setDeleting(false);
+      setIndex((i) => (i + 1) % roles.length);
+    }
+    return () => clearTimeout(timeout);
+  }, [displayed, deleting, index]);
+
+  return (
+    <span className="gradient-text">
+      {displayed}
+      <span className="inline-block w-0.5 h-[0.85em] ml-0.5 align-middle animate-pulse"
+        style={{ background: "var(--accent)", borderRadius: 2 }} />
+    </span>
+  );
+}
+
 export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center overflow-hidden pt-16"
       style={{ background: "var(--bg)" }}>
 
+      {/* Dot grid background */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, var(--border) 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+          opacity: 0.6,
+        }} />
+
       {/* Ambient blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-72 sm:w-[480px] h-72 sm:h-[480px] rounded-full opacity-[0.18]"
-          style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)", filter: "blur(72px)" }} />
-        <div className="absolute -bottom-40 -left-40 w-64 sm:w-[380px] h-64 sm:h-[380px] rounded-full opacity-[0.08]"
-          style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(80px)" }} />
+        <div className="absolute -top-40 -right-40 w-72 sm:w-[520px] h-72 sm:h-[520px] rounded-full opacity-[0.22]"
+          style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)", filter: "blur(80px)" }} />
+        <div className="absolute -bottom-40 -left-40 w-64 sm:w-[400px] h-64 sm:h-[400px] rounded-full opacity-[0.1]"
+          style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(90px)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04]"
+          style={{ background: "radial-gradient(circle, var(--accent) 0%, transparent 60%)", filter: "blur(60px)" }} />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 w-full">
@@ -80,17 +122,17 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            <motion.h1 {...fadeUp(0.2)}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-bold leading-[1.06] tracking-tight mb-6"
-              style={{ color: "var(--text-primary)" }}>
-              Building at the<br />
-              <span className="gradient-text">intersection</span><br />
-              of tech &amp; math.
-            </motion.h1>
+            <motion.div {...fadeUp(0.2)} className="mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-bold leading-[1.06] tracking-tight"
+                style={{ color: "var(--text-primary)" }}>
+                Hi, I'm Sachin<br />
+                <span className="block mt-1 min-h-[1.1em]"><Typewriter /></span>
+              </h1>
+            </motion.div>
 
             <motion.p {...fadeUp(0.3)} className="text-sm sm:text-base leading-relaxed mb-8 max-w-lg"
               style={{ color: "var(--text-secondary)" }}>
-              I'm Sachin — an IT graduate from Nepal with{" "}
+              An IT graduate from Nepal with{" "}
               <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>5+ years</span> across{" "}
               <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>web development</span>,{" "}
               <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>blockchain</span>,{" "}
@@ -127,19 +169,35 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="order-1 lg:order-2 flex items-center justify-center">
-            {/* Outer wrapper clips floating cards on mobile, shows them on lg+ */}
             <div className="relative flex items-center justify-center w-52 h-52 sm:w-64 sm:h-64 lg:w-[300px] lg:h-[300px]">
+
+              {/* Glowing pulse ring */}
+              <motion.div
+                animate={{ scale: [1, 1.08, 1], opacity: [0.3, 0.12, 0.3] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute rounded-full"
+                style={{ inset: "-18px", background: "radial-gradient(circle, var(--accent) 0%, transparent 70%)", filter: "blur(12px)" }} />
+
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
                 className="absolute rounded-full" style={{ inset: "-24px", border: "1px dashed var(--border-2)" }} />
               <motion.div animate={{ rotate: -360 }} transition={{ duration: 38, repeat: Infinity, ease: "linear" }}
                 className="absolute rounded-full" style={{ inset: "-46px", border: "1px dashed var(--border)" }} />
 
+              {/* Accent dot orbiting */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="absolute"
+                style={{ inset: "-24px" }}>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full"
+                  style={{ background: "var(--accent)", boxShadow: "0 0 8px var(--accent)" }} />
+              </motion.div>
+
               <div className="relative z-10 w-full h-full rounded-full overflow-hidden"
-                style={{ border: "3px solid var(--border)", boxShadow: "0 20px 60px color-mix(in srgb, var(--accent) 16%, transparent)" }}>
+                style={{ border: "3px solid var(--border)", boxShadow: "0 20px 60px color-mix(in srgb, var(--accent) 20%, transparent)" }}>
                 <img src={profileImg} alt="Sachin Pantha" className="w-full h-full object-cover object-top" />
               </div>
 
-              {/* Floating cards — hidden on small screens to prevent overflow */}
               {floatingCards.map((card, i) => (
                 <motion.div key={card.label}
                   initial={{ opacity: 0, scale: 0.6 }}
@@ -164,8 +222,8 @@ export default function Hero() {
           className="mt-14 sm:mt-20 pt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8"
           style={{ borderTop: "1px solid var(--border)" }}>
           {stats.map((s) => (
-            <div key={s.label}>
-              <p className="text-4xl sm:text-5xl font-bold mb-1.5 tabular-nums"
+            <div key={s.label} className="group">
+              <p className="text-4xl sm:text-5xl font-bold tabular-nums mb-1"
                 style={{ color: "var(--accent)", letterSpacing: "-0.02em" }}>
                 <Counter to={s.to} />{s.suffix}
               </p>
@@ -174,6 +232,20 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.a
+        href="#expertise"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-xs"
+        style={{ color: "var(--text-muted)" }}>
+        <span className="tracking-widest uppercase" style={{ fontSize: "10px" }}>Scroll</span>
+        <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}>
+          <ChevronDown size={16} />
+        </motion.div>
+      </motion.a>
     </section>
   );
 }

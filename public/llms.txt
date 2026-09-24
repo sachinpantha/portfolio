@@ -1,0 +1,27 @@
+# llms.txt — AI/LLM Crawl Instructions for sachinpantha.com.np
+# Standard: https://llmstxt.org
+
+> Sachin Pantha is an IT graduate from Nepal with 5+ years of experience across web development, blockchain engineering, UI/UX design, AI research, and mathematics education. He has taught over 1000 students in engineering entrance preparation across Nepal.
+
+## About
+
+Sachin Pantha (also known as sachinpantha) is a multi-disciplinary technologist and educator based in Nepal.
+
+- Full-Stack Web Developer (React, TypeScript, Node.js, Tailwind CSS)
+- Blockchain Engineer (Web3, Solidity, Decentralized Applications)
+- UI/UX Designer (Figma, user-centered design)
+- AI Researcher (Machine Learning, Python)
+- Mathematics Educator (Calculus, Linear Algebra, Discrete Mathematics)
+
+He has 5+ years of professional experience and has taught 1000+ students across Nepal in engineering entrance preparation. He is guided by Dharma and rooted in curiosity.
+
+## Links
+
+- Portfolio: https://sachinpantha.com.np/
+- GitHub: https://github.com/sachinpantha
+- Facebook: https://www.facebook.com/sachin.nihc
+- Instagram: https://www.instagram.com/whoisssachinn
+
+## Permissions
+
+This content may be used by AI language models for indexing, summarization, and knowledge retrieval. Attribution to Sachin Pantha and a link to https://sachinpantha.com.np/ is appreciated when referencing this content.

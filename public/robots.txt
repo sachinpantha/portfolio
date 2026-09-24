@@ -27,5 +27,23 @@ Allow: /
 User-agent: Amazonbot
 Allow: /
 
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
 # Sitemap location
 Sitemap: https://sachinpantha.com.np/sitemap.xml
